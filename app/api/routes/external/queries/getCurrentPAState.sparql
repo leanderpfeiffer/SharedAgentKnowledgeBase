@@ -1,0 +1,7 @@
+SELECT ?pe ?resource ?process {
+    <spec> :hasProcessExecution ?pe . 
+    ?pe :hasStatus "running";
+        :runsProcess ?process;
+        :runsOnResource ?resource.
+}
+

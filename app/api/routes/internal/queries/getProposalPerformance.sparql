@@ -1,0 +1,33 @@
+SELECT DISTINCT ?spec ?startTime ?endTime ?emissions ?quality ?costs ?type
+WHERE{
+    {?pe :hasProposalGroup <proposalGroup>.
+    ?spec :hasProcessExecution [
+        :hasStatus ?status;
+        :runsProcess ?proc;
+        :plannedStartTime ?startTime;
+        :plannedEndTime ?endTime
+        ].
+    ?proc :expectedPerformance [
+        :emissions ?emissions;
+        :quality ?quality;
+        :costs ?costs
+    ]   
+    FILTER(?status = "proposed" || ?status = "planned" || ?status = "running")
+    BIND("expected" as ?type)
+    }UNION{
+        ?pe :hasProposalGroup <proposalGroup>.
+    ?spec :hasProcessExecution [
+        :hasStatus ?status;
+        :runsProcess ?proc;
+        :realStartTime ?startTime;
+        :realEndTime ?endTime;
+        :realPerformance [
+        :emissions ?emissions;
+        :quality ?quality;
+        :costs ?costs
+        ]  
+    ]
+    FILTER(?status = "successfull")
+    BIND("real" as ?type)
+    }
+}

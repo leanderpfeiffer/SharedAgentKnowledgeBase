@@ -1,0 +1,25 @@
+SELECT ?error ?criticalPart WHERE {
+      {
+            FILTER NOT EXISTS{<processExecution> a/rdfs:subClassOf* :processExecution}
+            BIND("Process Execution not defined" as ?error)
+            BIND("-" as ?criticalPart)
+      }UNION{
+            FILTER NOT EXISTS{<processExecution> :hasStatus "proposed"}
+            <processExecution> :hasStatus ?status.
+            BIND("Process Executions state should be only proposed" as ?error)
+            BIND(?status as ?criticalPart)
+      }UNION{
+              <processExecution> :plannedStartTime ?startTimeNew;
+                                          :plannedEndTime ?endTimeNew;
+                                          :runsOnResource ?res.
+                                    ?plan :runsOnResource ?res;
+                                            :hasStatus ?status;
+                                            :plannedStartTime ?startTimeSet;
+                                            :plannedEndTime ?endTimeSet.
+                FILTER((?startTimeSet <= ?startTimeNew && ?endTimeSet >= ?startTimeNew)||
+                (?startTimeSet <= ?endTimeNew && ?endTimeSet >= ?endTimeNew)||
+                (?startTimeSet >= ?startTimeNew && ?endTimeSet <= ?endTimeNew))
+                FILTER(?status = "planned" || ?status = "running" || ?status = "successfull")
+          BIND("Resource already in use during timeframe of proposal" as ?error)
+          BIND(?plan as ?criticalPart)
+      }}

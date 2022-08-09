@@ -1,0 +1,3 @@
+SELECT ?active WHERE{
+    <resource> :isActive ?active
+}

@@ -1,0 +1,6 @@
+SELECT ?execution ?proc ?spec{
+  ?execution :runsOnResource <resource>;
+      :runsProcess ?proc;
+      :hasStatus "running".
+  ?spec :hasProcessExecution ?execution
+}

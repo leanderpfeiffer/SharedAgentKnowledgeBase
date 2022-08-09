@@ -1,0 +1,9 @@
+SELECT DISTINCT ?pe ?resource ?process ?feature ?startTime ?endTime {
+    <spec> :hasProcessExecution ?pe . 
+    ?pe :runsProcess ?process;
+        :hasStatus "successfull";
+        :realStartTime ?startTime;
+        :realEndTime ?endTime;
+        :runsOnResource ?resource.
+    OPTIONAL{?process :realizes ?feature}
+}ORDER BY ?startTime

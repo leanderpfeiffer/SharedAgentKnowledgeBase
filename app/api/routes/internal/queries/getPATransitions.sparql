@@ -1,0 +1,31 @@
+SELECT DISTINCT ?spec ?feat1 ?feat2 ?proc ?res WHERE {
+	?spec a/rdfs:subClassOf* :specification ; 
+		:defines ?feat1 , ?feat2 . 
+	FILTER (?feat1 != ?feat2)
+	?proc :realizes ?feat2 . 
+	?res :capableOf ?proc;
+        :isActive ?resActive.
+    FILTER(?resActive)
+	?feat1 a ?feat1class .
+	?feat1class rdfs:subClassOf :feature.
+	?feat2 a ?feat2class . 
+	?feat2class rdfs:subClassOf :feature.
+	FILTER NOT EXISTS {
+		?feat2class rdfs:subClassOf ?r . 
+		?r owl:onProperty :fprecedes ; 
+			owl:someValuesFrom ?feat1class . 
+	}
+	FILTER NOT EXISTS {
+        ?spec :hasProcessExecution ?execution.
+        ?execution :runsProcess ?process;
+                   :hasStatus "successfull".
+        ?process :realizes ?feat1.
+	}
+	FILTER NOT EXISTS {
+        ?spec :hasProcessExecution ?execution.
+        ?execution :runsProcess ?process;
+                   :hasStatus "successfull".
+        ?process :realizes ?feat2.
+	}
+	
+} ORDER BY ?spec ?feat1 ?feat2 ?proc ?res

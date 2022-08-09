@@ -1,0 +1,11 @@
+SELECT DISTINCT ?spec ?priority ?value ?type
+WHERE{
+    ?pe :hasProposalGroup <proposalGroup>.
+    ?spec :hasProcessExecution ?pe;
+        :hasPriority ?priority;
+        :hasObjectiveFunction [
+            :hasCoefficient [
+           :hasValue ?value;
+            :coefficientFor ?type]
+        ]
+}

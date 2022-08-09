@@ -1,0 +1,29 @@
+SELECT ?error WHERE {
+      {
+            FILTER NOT EXISTS{<specification> a/rdfs:subClassOf* :specification}
+            BIND("Specification not defined" as ?error)
+      }UNION{
+            FILTER NOT EXISTS{<resource> a/rdfs:subClassOf* :resource}
+            BIND("Resource not defined" as ?error)
+      }UNION{
+            FILTER NOT EXISTS{<process> a/rdfs:subClassOf* :process}
+            BIND("Process not defined" as ?error)
+      }UNION{
+            FILTER NOT EXISTS{ <resource> :capableOf <process>}
+            BIND("Resource can't run specified process" as ?error)
+      }UNION{
+          FILTER(<plannedStartTime>^^xsd:datetime >= <plannedEndTime>^^xsd:datetime)
+          BIND("Start time should be before End time" as ?error)
+      }UNION{              
+            BIND(<plannedStartTime> as ?startTimeNew)
+            BIND(<plannedEndTime> as ?endTimeNew)
+                  ?plan :runsOnResource <resource>;
+                        :hasProposalGroup <proposalGroup>;
+                        :plannedStartTime ?startTimeSet;
+                        :plannedEndTime ?endTimeSet.
+                FILTER((?startTimeSet <= ?startTimeNew && ?endTimeSet >= ?startTimeNew)||
+                (?startTimeSet <= ?endTimeNew && ?endTimeSet >= ?endTimeNew)||
+                (?startTimeSet >= ?startTimeNew && ?endTimeSet <= ?endTimeNew))
+          BIND("Time overlap at the resource for the specified proposal Group" as ?error)
+      }
+}

@@ -1,0 +1,3 @@
+DELETE{ <processExecution> :hasStatus "proposed".} 
+INSERT{ <processExecution> :hasStatus "planned". } 
+WHERE{ <processExecution> :hasStatus ?status. }

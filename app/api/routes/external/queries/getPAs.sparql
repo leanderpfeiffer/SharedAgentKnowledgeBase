@@ -1,0 +1,3 @@
+  SELECT DISTINCT ?spec WHERE {
+        ?spec a/rdfs:subClassOf* :specification. 
+        }

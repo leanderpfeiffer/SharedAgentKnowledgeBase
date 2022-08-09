@@ -1,0 +1,8 @@
+smatrix,abox,,,,,
+,,,,,,
+,,,,,,
+,,ObjectiveFunction,:hasCoefficient,:hasCoefficient,:hasCoefficient,:hasCoefficient
+,,obFcA1,costsA1,emissionsA1,qualityA1,durationA1
+,,obFcA2,costsA2,emissionsA2,qualityA2,durationA2
+,,obFcB1,costsB1,emissionsB1,qualityB1,durationB1
+,,obFcB2,costsB2,emissionsB2,qualityB2,durationB2

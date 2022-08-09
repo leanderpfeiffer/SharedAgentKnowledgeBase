@@ -1,0 +1,23 @@
+ INSERT DATA{ <id> a <specification>;
+            :defines :start, <features>, :end;
+            :hasObjectiveFunction [
+                a :objectiveFunction;
+                :hasCoefficient [
+                    :hasValue <timeCoeff>^^xsd:float;
+                    :coefficientFor "duration"^^xsd:str
+                ];
+                :hasCoefficient [
+                    :hasValue <qualityCoeff>^^xsd:float;
+                    :coefficientFor "quality"^^xsd:str
+                ];
+                :hasCoefficient [
+                    :hasValue <costCoeff>^^xsd:float;
+                    :coefficientFor "costs"^^xsd:str
+                ];
+                :hasCoefficient [
+                    :hasValue <emissionCoeff>^^xsd:float;
+                    :coefficientFor "emissions"^^xsd:str
+                ]
+            ];
+            :deadline <deadline>^^xsd:dateTime;
+            :hasPriority <priority>^^xsd:float.}

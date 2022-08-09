@@ -1,0 +1,11 @@
+SELECT DISTINCT ?execution ?emissions ?costs ?quality ?startTime ?endTime WHERE{
+?execution :runsOnResource <resource>;
+           :hasStatus "successfull";
+           :realPerformance [
+             :emissions ?emissions;
+             :costs ?costs;
+             :quality ?quality
+           ];
+           :realStartTime ?startTime;
+           :realEndTime ?endTime.
+}ORDER BY ?startTime

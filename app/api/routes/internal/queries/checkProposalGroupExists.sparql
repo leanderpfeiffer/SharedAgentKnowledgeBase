@@ -1,0 +1,3 @@
+ASK{
+    <proposalGroup> a/rdfs:subClassOf* :proposalGroup.
+}

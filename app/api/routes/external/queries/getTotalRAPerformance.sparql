@@ -1,0 +1,9 @@
+SELECT DISTINCT (SUM(?quality) as ?totalQuality) (SUM(?costs) as ?totalCost) (SUM(?emissions) as ?totalEmissions) WHERE {
+    ?PE :runsOnResource <resource>;
+        :realPerformance [
+            :emissions ?emissions;
+            :costs ?costs;
+            :quality ?quality
+        ].
+
+}

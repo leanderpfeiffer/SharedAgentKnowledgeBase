@@ -1,0 +1,10 @@
+SELECT DISTINCT ?res ?feat ?proc ?active ?cost ?emissions ?quality ?duration WHERE {
+	?res :capableOf ?proc;
+         :isActive ?active.
+	?proc :realizes ?feat; 
+       :expectedPerformance ?performance.
+    ?performance :costs ?cost;
+                 :emissions ?emissions;
+                 :quality ?quality;
+                 :duration ?duration.
+} ORDER BY ?res ?feat ?proc 

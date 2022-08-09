@@ -1,0 +1,9 @@
+SELECT  DISTINCT ?resource ?spec ?status ?process ?startTime ?endTime
+WHERE{
+    ?spec :hasProcessExecution ?pe.
+    ?pe :runsOnResource ?resource;
+        :hasStatus ?status;
+        :runsProcess ?process;
+        :plannedStartTime ?startTime;
+        :plannedEndTime ?endTime.
+}

@@ -1,0 +1,15 @@
+meta,tbox,,,,,,,,,,,
+,,,,,,,,,,,,
+,,a,,rdfs:subClassOf,,rdfs:subClassOf,,rdfs:subClassOf,,rdfs:subClassOf,,rdf:subClassOf
+,,rdfs:Class,,:feature,,:process,,:resource,,:specification,,:resHandl
+,,specification,,none,,rollout,,resConfl,,specTypeA,,lastResource
+,,coefficient,,all,,diffusion,,resDiff,,specTypeB,,firstResource
+,,feature,,featDiff,,ionImplantation,,resIonImplant,,,,
+,,product,,featIonImplant,,lithography,,resLith,,,,
+,,process,,featLith,,handling,,resHandl,,,,
+,,resource,,featConfl,,buffering,,resBuff,,,,
+,,objectiveFunction,,,,conflict,,,,,,
+,,performance,,,,initialize,,,,,,
+,,location,,,,,,,,,,
+,,processExecution,,,,,,,,,,
+,,proposalGroup,,,,,,,,,,

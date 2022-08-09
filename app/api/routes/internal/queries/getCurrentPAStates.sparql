@@ -1,0 +1,9 @@
+SELECT ?spec ?PE ?process {
+        ?spec :hasProcessExecution ?PE.
+        ?PE :plannedStartTime ?startTime;
+            :plannedEndTime ?endTime;
+            :hasStatus "planned";
+            :runsProcess ?process.
+        BIND(<currentTime>^^xsd:dateTime as ?currentTime)
+        FILTER(?startTime < ?currentTime && ?endTime > ?currentTime)
+}

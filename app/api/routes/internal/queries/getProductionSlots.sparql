@@ -1,0 +1,10 @@
+SELECT DISTINCT ?res ?res ?active ?status ?spec ?proc ?startTime ?endTime WHERE {
+    ?res :isActive ?active{
+    ?execution :runsOnResource ?res;
+               :hasStatus ?status;
+               :runsProcess ?proc;
+               :plannedStartTime ?startTime;
+               :plannedEndTime ?endTime.
+    ?spec :hasProcessExecution ?execution.
+    }UNION{}
+} ORDER BY ?res ?startTime 

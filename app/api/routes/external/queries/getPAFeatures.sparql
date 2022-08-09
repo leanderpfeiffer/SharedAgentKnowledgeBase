@@ -1,0 +1,17 @@
+  SELECT DISTINCT ?feature ?status WHERE {
+    {   <spec> :hasProcessExecution ?pe.
+        ?pe :runsProcess ?proc;
+            :hasStatus ?status.
+        ?proc :realizes ?feature.
+    }UNION{
+        <spec> :defines ?feature.
+        FILTER NOT EXISTS{
+            <spec> :hasProcessExecution ?pe.
+            ?pe :runsProcess ?proc;
+            :hasStatus ?status.
+            ?proc :realizes ?feature.
+        }
+        BIND("Idle" as ?status)
+
+    }
+}

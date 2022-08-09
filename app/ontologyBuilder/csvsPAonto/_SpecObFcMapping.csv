@@ -1,0 +1,8 @@
+matrix,abox,,,,,,
+,,,,,,,
+,,:hasObjectiveFunction,ObjectiveFunction,,,,
+,,Spec,,obFcA1,obFcA2,obFcB1,obFcB2
+,,,productA1,x,,,
+,,,productA2,,x,,
+,,,productB1,,,x,
+,,,productB2,,,,x

@@ -1,0 +1,7 @@
+DELETE{<processExecution> :hasStatus "running"}
+INSERT{
+    <processExecution> :hasStatus "errored";
+          :hasErrorMessage <errorMessage>.
+ }WHERE{
+     <processExecution> :hasStatus ?status
+ }

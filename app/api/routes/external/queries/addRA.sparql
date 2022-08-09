@@ -1,0 +1,6 @@
+INSERT DATA{
+    <name> a <resourceType>;
+        :neighbours <neighbours>;
+        :capableOf <capabilities>;
+        :isActive <isActive>.
+}

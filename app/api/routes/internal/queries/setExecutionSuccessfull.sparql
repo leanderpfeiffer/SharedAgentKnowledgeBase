@@ -1,0 +1,14 @@
+DELETE{<processExecution> :hasStatus "running"}
+INSERT{
+    <processExecution> :hasStatus "successfull";
+          :realStartTime <realStartTime>^^xsd:datetime;
+          :realEndTime <realEndTime>^^xsd:datetime;
+          :realPerformance [
+              :emissions <emissions>^^xsd:float;
+              :quality <quality>^^xsd:float;
+              :costs <costs>^^xsd:float
+          ]
+ }WHERE{
+     <processExecution> :hasStatus ?status
+ }
+ #TODO fix error wth query

@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  stardog:
+    container_name: "stardog"
+    image: stardog/stardog
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    user: root
+    ports:
+      - "5820:5820"
+    volumes:
+      -  ./app/stardog:/var/opt/stardog
+    networks:
+      - ontoNet
+   
+  api:
+    container_name: "api"
+    build: 
+      context: .
+      dockerfile: ./app/api/Dockerfile
+    environment:
+      - DBName=PAonto
+      - BASEURI=http://PAonto.com#
+      - BASEDIR=./
+      - APIDIR=./
+      - FILENAME=onto.owl
+      - SD_ENDPOINT=http://stardog:5820
+      - SD_USER=admin
+      - SD_PW=admin
+      - DOCKER=1
+    ports:
+      - "8000:8000"
+    networks:
+      - ontoNet
+    depends_on:
+      - stardog
+
+networks:
+  ontoNet:

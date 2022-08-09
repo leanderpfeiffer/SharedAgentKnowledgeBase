@@ -1,0 +1,10 @@
+    SELECT ?error WHERE {
+      {
+            FILTER NOT EXISTS{<processExecution> a/rdfs:subClassOf* :processExecution}
+            BIND("Process Execution not defined" as ?error)
+      }UNION{
+            FILTER NOT EXISTS{<processExecution> :hasStatus "running"}
+            <processExecution> :hasStatus ?status.
+            BIND("Process Executions should be in the Running state" as ?error)
+      }
+}

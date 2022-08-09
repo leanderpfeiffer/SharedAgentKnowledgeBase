@@ -1,0 +1,36 @@
+SELECT ?error WHERE {
+      {
+            FILTER NOT EXISTS{<feat> a/rdfs:subClassOf* :feature}
+            BIND("Feature not defined" as ?error)
+      }UNION{
+            FILTER NOT EXISTS{<spec> a/rdfs:subClassOf* :specification}
+            BIND("Specification not defined" as ?error)
+      }UNION{
+            <spec> :defines <feat>.
+            BIND("Feature already in specification" as ?error)
+      }UNION{
+            <spec> :defines ?feature.
+            ?feature a ?featureClass.
+            <feat> a ?newFeatureClass.
+            ?newFeatureClass rdfs:subClassOf [
+                  a owl:Restriction; 
+                  owl:onProperty :fconflicts;
+                  owl:someValuesFrom ?featureClass
+            ].
+            BIND("Feature Conflicts another feature, already defined by the specification." as ?error)
+      }UNION{
+            <spec> :hasProcessExecution ?pe.
+            ?feature a ?featureClass.
+            <feat> a ?newFeatureClass.
+            ?newFeatureClass rdfs:subClassOf [
+                  a owl:Restriction; 
+                  owl:onProperty :fprecedes;
+                  owl:someValuesFrom ?featureClass
+            ].
+            ?pe :runsProcess ?proc;
+                :hasStatus ?status.
+            ?proc :realizes ?feature.
+            FILTER(?status = "successfull" || ?status = "running")
+            BIND("Preceding Feature has already been Manufactured. Feature not possible." as ?error)
+      }
+}

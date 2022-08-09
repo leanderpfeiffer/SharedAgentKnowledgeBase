@@ -1,0 +1,10 @@
+INSERT DATA{
+    <specification> :hasProcessExecution <PEID>.
+    <PEID> a :processExecution;
+          :hasStatus "proposed";
+          :runsOnResource <resource>;
+          :runsProcess <process>;
+          :plannedStartTime <plannedStartTime>^^xsd:datetime;
+          :plannedEndTime <plannedEndTime>^^xsd:datetime;
+          :hasProposalGroup <proposalGroup>.
+}

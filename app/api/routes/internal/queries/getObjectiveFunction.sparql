@@ -1,0 +1,11 @@
+SELECT DISTINCT ?spec ?priority ?value ?type WHERE {
+	?spec a/rdfs:subClassOf* :specification;
+        :hasPriority ?priority;
+        :hasObjectiveFunction [
+            a :objectiveFunction;
+            :hasCoefficient [
+                :hasValue ?value;
+                :coefficientFor ?type
+        ]]
+
+} ORDER BY ?spec

@@ -1,0 +1,2 @@
+DELETE{<spec> :defines <feat>}
+WHERE{<spec> :defines <feat>}

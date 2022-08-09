@@ -1,0 +1,19 @@
+SELECT DISTINCT ?spec ?deadline ?feat ?status ?process ?res ?startTime ?endTime WHERE {
+	?spec a/rdfs:subClassOf* :specification . 
+	?spec :defines ?feat ; 
+		:deadline ?deadline;
+	OPTIONAL{
+		?spec :hasProcessExecution ?execution.
+        ?execution :runsProcess ?process;
+                   :hasStatus ?status;
+				   :runsOnResource ?res;
+				   :plannedStartTime ?startTime;
+				   :plannedEndTime ?endTime.
+        ?process :realizes ?feat.
+		FILTER(?status != "proposed")
+		}
+	#Remove all transitions to states already realized in Productionsteps
+
+
+
+} ORDER BY ?spec ?feat ?deadline
